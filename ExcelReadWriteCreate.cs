@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Practo_Web_Mini_Project
 {
-    public class ExcelReadWrite
+    public class ExcelReadWriteCreate
     {
         public void WriteDataToExcel()
         {
