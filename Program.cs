@@ -11,8 +11,8 @@ namespace Practo_Web_Mini_Project
     {
         public static void Main(string[] args)
         {
-            //Creating instance for ExcelReadWrite class
-            ExcelReadWrite Erw = new ExcelReadWrite();
+            //Creating instance for ExcelReadWriteCreate class
+            ExcelReadWriteCreate Erw = new ExcelReadWriteCreate();
 
             //Calling function for writing data in excel
             Erw.WriteDataToExcel();
