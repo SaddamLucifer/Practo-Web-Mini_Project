@@ -10,11 +10,11 @@ namespace Practo_Web_Mini_Project
 {
     public class ExcelReadWriteCreate
     {
-        public void WriteDataToExcel()
+        public Worksheet WriteDataToExcel()
         {
             //Creating array for storing city names in excel file
             string[] Cities = new string[7];
-            
+
             Console.WriteLine("Enter Names of cities: ");
 
             //Accepting city names from user to write in excel file
@@ -23,14 +23,14 @@ namespace Practo_Web_Mini_Project
                 Console.WriteLine("City-{0}: ", i);
                 Cities[i] = Console.ReadLine();
             }
-            
+
             //Path for Excel sheet to create and store
-            string path = @"G:\Practo-Web-Mini_Project\Citie.xlsx";
+            string path = @"G:\Practo-Web-Mini_Project\Cities.xlsx";
 
             //Creating new Excel file and storing names of cities in it
             Workbook w = new Workbook();
             Worksheet sheet = w.Worksheets[0];
-            w.Worksheets[0].Name = "City_Nmaes";  //Assigning name for sheet in excel file
+            w.Worksheets[0].Name = "City_Names";  //Assigning name for sheet in excel file
 
             //Storing input city values to Excel file using for loop
             for (int j = 1; j < 7; j++)
@@ -39,9 +39,12 @@ namespace Practo_Web_Mini_Project
                 Cell cell = sheet.Cells["A" + j];
                 cell.PutValue(Cities[j]);
             }
+
+
             w.Save(path, SaveFormat.Xlsx); //Saving Excel file in given path
             Console.WriteLine("Excel file created successfully...!!!");
-
+            return sheet;
         }
+
     }
 }
