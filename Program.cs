@@ -2,8 +2,10 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,7 +21,7 @@ namespace Practo_Web_Mini_Project
             //Creating instance for ExcelReadWriteCreate class
             ExcelReadWriteCreate Erw = new ExcelReadWriteCreate();
 
-            Erw.WriteDataToExcel();   //Calling function for writing data in excel
+            //Erw.WriteDataToExcel();   //Calling function for writing data in excel
 
             //Program pr = new Program();
             string path = @"G:\Practo-Web-Mini_Project\Cities.xlsx";
@@ -58,10 +60,20 @@ namespace Practo_Web_Mini_Project
             
             driver.FindElement(By.XPath("//*[@id='c-omni-container']/div/div[1]/div[1]/input")).SendKeys(Convert.ToString(sheet.Cells["A1"].Value));
             driver.FindElement(By.XPath("//*[@id='c-omni-container']/div/div[2]/div[1]/input")).SendKeys("hospital");
+            
+            ReadOnlyCollection<IWebElement> suggestions = driver.FindElements(By.XPath("//*[@id='c-omni-container']/div/div[2]/div[2]"));
+            Thread.Sleep(3000);
+            foreach (IWebElement suggestion in suggestions)
+            {
+                IWebElement hospital = driver.FindElement(By.ClassName("c-omni-suggestion-item__content"));
+                Actions actions = new Actions(driver);
+                actions.MoveToElement(hospital).Click().Perform();
+                
+            }
 
 
             //Console.Read();
-            driver.Quit();
+            //driver.Quit();
         }
 
 
