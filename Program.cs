@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
+//using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -23,7 +23,6 @@ namespace Practo_Web_Mini_Project
 
             //Erw.WriteDataToExcel();   //Calling function for writing data in excel
 
-            //Program pr = new Program();
             string path = @"G:\Practo-Web-Mini_Project\Cities.xlsx";
             Worksheet sheet = null;
 
@@ -31,8 +30,7 @@ namespace Practo_Web_Mini_Project
             {
                  sheet = Erw.WriteDataToExcel();
             }
-            //
-            // pr.WriteDataToExcel();
+            
 
             TextFileWriteRead Twr = new TextFileWriteRead();
             Twr.DirectoryOperation();
@@ -46,7 +44,7 @@ namespace Practo_Web_Mini_Project
             //IWebDriver driver = new FirefoxDriver();  //Download from Nudget Packages
 
             driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20000);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10000);
             driver.Url = web_url[0];
 
             // Instantiate a Workbook object that represents Excel file.
@@ -55,22 +53,57 @@ namespace Practo_Web_Mini_Project
             // Access "Sheet" from the workbook.
             sheet = wb.Worksheets[0];
 
+         
+
             //Enter input into search box city
             driver.FindElement(By.CssSelector("input.c-omni-searchbox")).Clear();
-            
-            driver.FindElement(By.XPath("//*[@id='c-omni-container']/div/div[1]/div[1]/input")).SendKeys(Convert.ToString(sheet.Cells["A1"].Value));
-            driver.FindElement(By.XPath("//*[@id='c-omni-container']/div/div[2]/div[1]/input")).SendKeys("hospital");
+            driver.FindElement(By.CssSelector("input.c-omni-searchbox")).SendKeys(Convert.ToString(sheet.Cells["A1"].Value));
+
+            driver.FindElement(By.XPath("//*[@id='c-omni-container']/div/div[2]/div/input")).Clear();
+            driver.FindElement(By.XPath("//*[@id='c-omni-container']/div/div[2]/div/input")).SendKeys("hospital");
+            Thread.Sleep(3000);
+
+            //driver.FindElement(By.XPath("//div[@data-qa-id='omni-suggestion-main' and text()='Hospital']")).Click();
             
             ReadOnlyCollection<IWebElement> suggestions = driver.FindElements(By.XPath("//*[@id='c-omni-container']/div/div[2]/div[2]"));
             Thread.Sleep(3000);
             foreach (IWebElement suggestion in suggestions)
             {
-                IWebElement hospital = driver.FindElement(By.ClassName("c-omni-suggestion-item__content"));
+                IWebElement hospital = driver.FindElement(By.XPath("//*[@id='c-omni-container']/div/div[2]/div[2]/div[1]/div[1]/span[1]/div"));
                 Actions actions = new Actions(driver);
                 actions.MoveToElement(hospital).Click().Perform();
-                
             }
 
+
+
+            // STEP-3
+            //Acredited
+            driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[1]/div/div/header/div[1]/div")).Click();
+            ReadOnlyCollection <IWebElement> acccredited = driver.FindElements(By.XPath("/html/body/div[1]/div/div[3]/div/div[1]/div/div/header/div[1]/div/div[2]/label/div"));
+            Thread.Sleep(2000);
+            foreach (IWebElement option in acccredited)
+            {
+                IWebElement acc = driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[1]/div/div/header/div[1]/div/div[2]/label/div"));
+                Actions actions = new Actions(driver);
+                actions.MoveToElement(acc).Click().Perform();
+            }
+
+            //IWebElement checkbox1 = driver.FindElement(By.Id("Accredited0"));
+            //checkbox1.Click();
+            Thread.Sleep(2000);
+
+            //24X7 Pharmacy
+            driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[1]/div/div/header/div[1]/div/div[4]/span")).Click();
+            ReadOnlyCollection<IWebElement> amenity = driver.FindElements(By.XPath("//*[@id='container']/div[3]/div/div[1]/div/div/header/div[2]/div/div/div"));
+            Thread.Sleep(2000);
+            foreach (IWebElement amenities in amenity)
+            {
+                IWebElement pharmacy = driver.FindElement(By.CssSelector("input#Amenities2"));
+                Actions actions = new Actions(driver);
+                actions.MoveToElement(pharmacy).Click().Perform();
+            }
+
+            Thread.Sleep(3000);
 
             //Console.Read();
             //driver.Quit();
