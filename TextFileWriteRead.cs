@@ -22,7 +22,7 @@ namespace Practo_Web_Mini_Project
             using (StreamWriter sw = File.CreateText(path))
             {
                 Console.WriteLine("New Text File Created!!!!!");
-                sw.WriteLine("https://www.practo.com/doctors");
+                sw.WriteLine("https://www.practo.com/");
             }
 
             using (StreamReader rdr = File.OpenText(path))

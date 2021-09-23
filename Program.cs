@@ -1,4 +1,6 @@
 ﻿using Aspose.Cells;
+using Aspose.Cells.Drawing;
+//using Microsoft.Office.Interop.Excel;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -44,8 +46,10 @@ namespace Practo_Web_Mini_Project
             //IWebDriver driver = new FirefoxDriver();  //Download from Nudget Packages
 
             driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10000);
+            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10000);
             driver.Url = web_url[0];
+            Thread.Sleep(3000);
+            driver.FindElement(By.PartialLinkText("Book an app")).Click();
 
             // Instantiate a Workbook object that represents Excel file.
             Workbook wb = new Workbook(path);
@@ -98,15 +102,39 @@ namespace Practo_Web_Mini_Project
             Thread.Sleep(2000);
             foreach (IWebElement amenities in amenity)
             {
-                IWebElement pharmacy = driver.FindElement(By.CssSelector("input#Amenities2"));
+                IWebElement pharmacy = driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[1]/div/div/header/div[2]/div/div/div/label[3]/div"));
                 Actions actions = new Actions(driver);
                 actions.MoveToElement(pharmacy).Click().Perform();
             }
 
             Thread.Sleep(3000);
 
-            //Console.Read();
-            //driver.Quit();
+            //STEP 4-
+            ReadOnlyCollection<IWebElement> ratings_hospitals = driver.FindElements(By.XPath("//div[@data-qa-id='hospital_card']//div[@data-qa-id='star_rating']//span[@class='common_star-rating_value']"));
+            foreach (IWebElement rating in ratings_hospitals)
+            {
+                string[] star = rating.Text.Split('.');
+                Console.WriteLine(star[0]);
+                int star_value = Int16.Parse(star[0]);
+                if (star_value > 3)
+                {
+                    /*
+                    ReadOnlyCollection<IWebElement> top_hospitals_list = driver.FindElements(By.XPath("//div[@class='']//h2[data-qa-id*='hospital_name']"));
+                    Thread.Sleep(3000);
+                    foreach (IWebElement list in top_hospitals_list)
+                    {
+                        string List= list.Text;
+                        Console.WriteLine(List);
+                    }
+                    */
+                }
+            }
+
+
+
+            Console.Read();
+            Thread.Sleep(3000);
+            driver.Quit();
         }
 
 
