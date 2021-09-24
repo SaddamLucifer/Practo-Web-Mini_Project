@@ -10,7 +10,7 @@ namespace Practo_Web_Mini_Project
 {
     public class ExcelReadWriteCreate
     {
-        public Worksheet WriteDataToExcel()
+        /*public Worksheet WriteDataToExcel(string path)
         {
             //Creating array for storing city names in excel file
             string[] Cities = new string[7];
@@ -44,7 +44,7 @@ namespace Practo_Web_Mini_Project
             w.Save(path, SaveFormat.Xlsx); //Saving Excel file in given path
             Console.WriteLine("Excel file created successfully...!!!");
             return sheet;
-        }
+        }*/
 
     }
 }

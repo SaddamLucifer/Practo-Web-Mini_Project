@@ -66,3 +66,17 @@ namespace Practo_Web_Mini_Project
 
     }
 }
+//Creating instance for ExcelReadWriteCreate class
+//ExcelReadWriteCreate Erw = new ExcelReadWriteCreate();
+//Program pr = new Program();
+
+/*pr.WriteDataToExcel();  //Calling function for writing data in excel
+
+string path = @"G:\Practo-Web-Mini_Project\Cities.xlsx";
+Worksheet sheet = null;
+
+if (!File.Exists(path))
+{
+     sheet = pr.WriteDataToExcel();
+}
+*/
