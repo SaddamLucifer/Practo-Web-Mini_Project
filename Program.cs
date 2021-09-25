@@ -24,6 +24,9 @@ namespace Practo_Web_Mini_Project
         public static List<String> ReadDataFromExcel(String path)
         {
             path = @"G:\Practo-Web-Mini_Project\Cities.xlsx";
+
+            //Using NPOI pkg reading data from Excel
+
             XSSFWorkbook wb = new XSSFWorkbook(File.Open(path, FileMode.Open));
             XSSFSheet sh = (XSSFSheet)wb.GetSheetAt(0);
             XSSFRow row = (XSSFRow)sh.GetRow(0);
