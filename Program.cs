@@ -67,7 +67,7 @@ namespace Practo_Web_Mini_Project
             //IWebDriver driver = new FirefoxDriver();  //Download from Nudget Packages
 
             driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10000);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15000);
             driver.Url = web_url[0];
             Thread.Sleep(3000);
             //driver.FindElement(By.PartialLinkText("Book an app")).Click();
@@ -76,7 +76,7 @@ namespace Practo_Web_Mini_Project
             List<String> cell_values = ReadDataFromExcel(path);
 
 
-            //Iteration using For loop
+            //Iteration for 5 cities using For loop
 
             for (int rows = 0; rows < 5; rows++)
             {
@@ -127,9 +127,6 @@ namespace Practo_Web_Mini_Project
                     Actions actions = new Actions(driver);
                     actions.MoveToElement(acc).Click().Perform();
                 }
-
-                //IWebElement checkbox1 = driver.FindElement(By.Id("Accredited0"));
-                //checkbox1.Click();
                 Thread.Sleep(2000);
 
                 //24X7 Pharmacy
@@ -170,21 +167,26 @@ namespace Practo_Web_Mini_Project
 
                 Console.WriteLine("Top 5 Hospitals for city "+ cell_values[rows]+ " are:");
                 //Console.WriteLine(cell_values[rows]);
-                for (int i = 0; i < 5; i++)
+                TextWriter tsw = new StreamWriter(@"G:\Practo-Web-Mini_Project\Result.txt", true);
+                //Writing text to file
+                tsw.WriteLine(cell_values[rows]);
+                for (int i = 1; i < 6; i++)
                 {
                     //Console.WriteLine("Staus of Search Result for city"+"/t" + cell_values[rows] +"/t" +"Pass");
                        // File.Create(path1);
 
                         if (hospitals.Count != 0)
                         {
-                            Console.WriteLine("Hospital:" + hospitals[i]);                            
-                        }               
+                            Console.WriteLine("Hospital"+ i +": "+ hospitals[i]);
+                            tsw.WriteLine("Hospital" + i + ": " + hospitals[i]);
+                        }
 
                     //path1 = @"G:\Practo-Web-Mini_Project\Result.txt";
                     //File.WriteAllLines(path1, hospitals);
-                    //File.AppendAllLines(path1,hospitals);                    
+                    //File.AppendAllLines(path1,hospitals)                
                 }
-               
+                //closing  the file
+                tsw.Close();
 
 
                 driver.FindElement(By.CssSelector("input.c-omni-searchbox")).Clear();

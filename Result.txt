@@ -1,7 +1,25 @@
-Motherhood Hospital
-Koshys Hospital
-Manipal Hospital
-The Eye Foundation Super Specialty Eye Hospital
-Cytecare Cancer Hospitals
-Patients First - A Unit of Shraddha Health Care
-Keva Ayurveda Healthcare Pvt Ltd
+Bangalore
+Hospital1: Koshys Hospital
+Hospital2: Manipal Hospital
+Hospital3: The Eye Foundation Super Specialty Eye Hospital
+Hospital4: Cytecare Cancer Hospitals
+Hospital5: Patients First - A Unit of Shraddha Health Care
+Pune
+Hospital1: IMax Multispeciality Hospital
+Hospital2: Umarji Mother & Child Care
+Hospital3: Alpha Superspeciality Hospital
+Hospital4: Skinovate Laser & Cosmetic Surgery Center LLP
+Hospital5: Harsh Hospital
+Mumbai
+Hospital1: Dr L H Hiranandani Hospital
+Hospital2: Madhu Hospital
+Hospital3: Lifewave Hospital
+Hospital4: Womens Hospital
+Hospital5: SRV Hospital
+Nashik
+Delhi
+Hospital1: Fortis La Femme
+Hospital2: Handa Aesthetic and Plastics
+Hospital3: Netrayatan Eye & Ivf Hospital
+Hospital4: Fortis Bloom IVF Centre, Fortis LaFemme Hospital
+Hospital5: Shanti Mukand Hospital
