@@ -1,0 +1,9 @@
+Fetch URL from text file and open website 	Pass 	 Website opened successfully
+Fetch city from excel and type into searchbox 	Pass 	 City entered and searched successfully
+Type and search hospitals in searchbox 	Pass 	hospitals searched successfuly
+Click on Accredited Checkbox 	Pass 	Clicked on checkbox successfully
+Click on 24x7 Pharmacy Checkbox 	Pass 	Clicked on checkbox successfully
+search hospitals having rating>3 	Pass 	Hospitals searched successfully
+Print Max top 5 hospitals for searched city on console 	Pass 	Printed on console successfully
+Write Max top 5 hospitals for searched city in a text file 	Pass 	Created text file and wrote hospital names in text file successfully
+Give current dateTime to Module text file 	Pass 	text File created successfully

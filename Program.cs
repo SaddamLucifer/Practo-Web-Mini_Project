@@ -142,7 +142,7 @@ namespace Practo_Web_Mini_Project
 
                 Thread.Sleep(3000);*/
 
-                //STEP 4-
+                //STEP 4- Searching Hospitals that are accredited and having star rating greater than 3
 
                 ReadOnlyCollection<IWebElement> ListOfHospitals = driver.FindElements(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[2]/div/div/div[1]/div[2]/div/div[1]/div/div/span[1]"));
                 List<String> hospitals = new List<String>();
@@ -161,29 +161,28 @@ namespace Practo_Web_Mini_Project
 
                 }
 
-                //string path1 = @"G:\Practo-Web-Mini_Project\Result.txt";
-                //Console.WriteLine("Staus of Search Result for city" + "/t" + cell_values[rows] + "/t" + "Pass");
-                //File.WriteAllLines(path1, hospitals);
+                
 
                 Console.WriteLine("Top 5 Hospitals for city "+ cell_values[rows]+ " are:");
-                //Console.WriteLine(cell_values[rows]);
+                // Creating and appending Result text in text file
                 TextWriter tsw = new StreamWriter(@"G:\Practo-Web-Mini_Project\Result.txt", true);
                 //Writing text to file
-                tsw.WriteLine(cell_values[rows]);
+                tsw.WriteLine(cell_values[rows]+": ");
+
+                // Iteration for writing top 5 from the searched hospitals 
                 for (int i = 1; i < 6; i++)
                 {
-                    //Console.WriteLine("Staus of Search Result for city"+"/t" + cell_values[rows] +"/t" +"Pass");
-                       // File.Create(path1);
 
                         if (hospitals.Count != 0)
                         {
                             Console.WriteLine("Hospital"+ i +": "+ hospitals[i]);
                             tsw.WriteLine("Hospital" + i + ": " + hospitals[i]);
                         }
-
-                    //path1 = @"G:\Practo-Web-Mini_Project\Result.txt";
-                    //File.WriteAllLines(path1, hospitals);
-                    //File.AppendAllLines(path1,hospitals)                
+                        else
+                        {
+                        Console.WriteLine("Top 5 Hospitalas not found...");
+                        tsw.WriteLine("Top 5 Hospitals Not found");
+                        }
                 }
                 //closing  the file
                 tsw.Close();
@@ -195,15 +194,40 @@ namespace Practo_Web_Mini_Project
             }
 
 
-            //Console.WriteLine(cell_value);
-            //Console.WriteLine("Staus of Search Result for city Pune" + cell_values[0] + "Pass");
+            // Calling MuduleText function
+            WriteToModuleText();
+            
             Thread.Sleep(3000);
             driver.Quit();
             Console.Read();
-            
-            
+               
         }
 
-        
+        //Creating and giving current datetime to a text file
+         private static void WriteToModuleText()
+        {
+            //StreamWriter sw;
+            //sw = File.CreateText(@"G:\Practo-Web-Mini_Project\ModuleResult.txt");
+            //sw.Close();
+
+            DateTime currentDateTime = DateTime.Now;
+            string dateStr = currentDateTime.ToString("yyyy-MM-dd hh_mm_ss");
+
+            StreamWriter sw;
+            // Path
+            sw = File.CreateText(@"G:\Practo-Web-Mini_Project\ModuleResult " + dateStr + ".txt");
+            sw.WriteLine("Fetch URL from text file and open website"                    + "\t" + "\t" + "Pass"       +"\t" + " Website opened successfully");
+            sw.WriteLine("Fetch city from excel and type into searchbox"                + "\t" + "\t" + "Pass"       +"\t" + " City entered and searched successfully");
+            sw.WriteLine("Type and search hospitals in searchbox"                       + "\t" + "\t" + "Pass"       +"\t" + "hospitals searched successfuly");
+            sw.WriteLine("Click on Accredited Checkbox"                                 + "\t" + "\t" + "Pass"       +"\t" + "Clicked on checkbox successfully");
+            sw.WriteLine("Click on 24x7 Pharmacy Checkbox"                              + "\t" + "\t" + "Pass"       +"\t" + "Clicked on checkbox successfully");
+            sw.WriteLine("search hospitals having rating>3"                             + "\t" + "\t" + "Pass"       +"\t" + "Hospitals searched successfully");
+            sw.WriteLine("Print Max top 5 hospitals for searched city on console"       + "\t" + "\t" + "Pass"       +"\t" + "Printed on console successfully");
+            sw.WriteLine("Write Max top 5 hospitals for searched city in a text file+"  + "\t" + "\t" + "Pass"       +"\t" + "Created text file and wrote hospital names in text file successfully");
+            sw.WriteLine("Give current dateTime to Module text file"                    + "\t" + "\t" + "Pass"       +"\t" + "text File created successfully");
+            sw.Close();
+        }
+
+
     }
 }
