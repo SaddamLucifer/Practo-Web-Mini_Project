@@ -130,7 +130,7 @@ namespace Practo_Web_Mini_Project
                 Thread.Sleep(2000);
 
                 //24X7 Pharmacy
-                /*driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[1]/div/div/header/div[1]/div/div[4]/span")).Click();
+                driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[1]/div/div/header/div[1]/div/div[4]/span")).Click();
                 ReadOnlyCollection<IWebElement> amenity = driver.FindElements(By.XPath("//*[@id='container']/div[3]/div/div[1]/div/div/header/div[2]/div/div/div"));
                 Thread.Sleep(2000);
                 foreach (IWebElement amenities in amenity)
@@ -140,21 +140,24 @@ namespace Practo_Web_Mini_Project
                     actions.MoveToElement(pharmacy).Click().Perform();
                 }
 
-                Thread.Sleep(3000);*/
+                Thread.Sleep(3000);
 
-                //STEP 4- Searching Hospitals that are accredited and having star rating greater than 3
+                //STEP 4- Searching Hospitals that are Accredited, 27x7 pharmacy And having star rating greater than 3
 
-                ReadOnlyCollection<IWebElement> ListOfHospitals = driver.FindElements(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[2]/div/div/div[1]/div[2]/div/div[1]/div/div/span[1]"));
+                //ReadOnlyCollection<IWebElement> ListOfHospitals = driver.FindElements(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[2]/div/div/div[1]/div[2]/div/div[1]/div/div/span[1]"));
+                ReadOnlyCollection<IWebElement> ListOfHospitals = driver.FindElements(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[3]/div/div/div[1]/div[2]/div/div[1]/div/div/span[1]"));
                 List<String> hospitals = new List<String>();
                 for (int i = 2; i < ListOfHospitals.Count; i++)
                 {
-                    IWebElement star_rating = driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[2]/div[" + i + "]/div/div[1]/div[2]/div/div[1]/div/div/span[1]"));
+                    //IWebElement star_rating = driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[2]/div[" + i + "]/div/div[1]/div[2]/div/div[1]/div/div/span[1]"));
+                    IWebElement star_rating = driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[3]/div[" + i + "]/div/div[1]/div[2]/div/div[1]/div/div/span[1]"));
                     String[] stars = star_rating.Text.Split('.');
                     int star_value = Int16.Parse(stars[0]);
                     Console.WriteLine(star_value);
                     if (star_value > 3)
                     {
-                        String hospital_name = driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[2]/div[" + i + "]//h2")).Text;
+                      //String hospital_name = driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[2]/div[" + i + "]//h2")).Text;
+                        String hospital_name = driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[" + i + "]//a/h2")).Text;
                         Console.WriteLine(hospital_name);
                         hospitals.Add(hospital_name);
                     }
@@ -216,15 +219,15 @@ namespace Practo_Web_Mini_Project
             StreamWriter sw;
             // Path
             sw = File.CreateText(@"G:\Practo-Web-Mini_Project\ModuleResult " + dateStr + ".txt");
-            sw.WriteLine("Fetch URL from text file and open website"                    + "\t" + "\t" + "Pass"       +"\t" + " Website opened successfully");
-            sw.WriteLine("Fetch city from excel and type into searchbox"                + "\t" + "\t" + "Pass"       +"\t" + " City entered and searched successfully");
-            sw.WriteLine("Type and search hospitals in searchbox"                       + "\t" + "\t" + "Pass"       +"\t" + "hospitals searched successfuly");
-            sw.WriteLine("Click on Accredited Checkbox"                                 + "\t" + "\t" + "Pass"       +"\t" + "Clicked on checkbox successfully");
-            sw.WriteLine("Click on 24x7 Pharmacy Checkbox"                              + "\t" + "\t" + "Pass"       +"\t" + "Clicked on checkbox successfully");
-            sw.WriteLine("search hospitals having rating>3"                             + "\t" + "\t" + "Pass"       +"\t" + "Hospitals searched successfully");
-            sw.WriteLine("Print Max top 5 hospitals for searched city on console"       + "\t" + "\t" + "Pass"       +"\t" + "Printed on console successfully");
-            sw.WriteLine("Write Max top 5 hospitals for searched city in a text file+"  + "\t" + "\t" + "Pass"       +"\t" + "Created text file and wrote hospital names in text file successfully");
-            sw.WriteLine("Give current dateTime to Module text file"                    + "\t" + "\t" + "Pass"       +"\t" + "text File created successfully");
+            sw.WriteLine("Fetch URL from text file and open website"                    + "\t" + "\t" + "Pass"      + "\t" + "\t" +                 " Website opened successfully");
+            sw.WriteLine("Fetch city from excel and type into searchbox"                + "\t" + "\t" + "Pass"      + "\t" + "\t" +                 " City entered and searched successfully");
+            sw.WriteLine("Type and search hospitals in searchbox"                       + "\t" + "\t" + "Pass"      + "\t" + "\t" + "\t" +          " Hospitals searched successfuly");
+            sw.WriteLine("Click on Accredited Checkbox"                                 + "\t" + "\t" + "Pass"      + "\t" + "\t" + "\t" + "\t" +   " Clicked on checkbox successfully");
+            sw.WriteLine("Click on 24x7 Pharmacy Checkbox"                              + "\t" + "\t" + "Pass"      + "\t" + "\t" + "\t" + "\t" +   " Clicked on checkbox successfully");
+            sw.WriteLine("search hospitals having rating>3"                             + "\t" + "\t" + "Pass"      + "\t" + "\t" + "\t" +          " Hospitals searched successfully");
+            sw.WriteLine("Print Max top 5 hospitals for searched city on console"       + "\t" + "\t" + "Pass"      + "\t" +                        " Printed on console successfully");
+            sw.WriteLine("Write Max top 5 hospitals for searched city in a text file+"  + "\t"        + "Pass"      + "\t" +                        " Created text file and wrote hospital names in text file successfully");
+            sw.WriteLine("Give current dateTime to Module text file"                    + "\t" + "\t" + "Pass"      + "\t" + "\t" +                 " Text File created successfully");
             sw.Close();
         }
 
