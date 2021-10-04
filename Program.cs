@@ -64,6 +64,8 @@ namespace Practo_Web_Mini_Project
             string[] web_url = System.IO.File.ReadAllLines(@"G:\Practo-Web-Mini_Project\creds.txt");
 
             IWebDriver driver = new ChromeDriver();     //Download from Nudget Packages
+            //var options = new ChromeOptions();
+            //options.AddArgument("no-sandbox");
             //IWebDriver driver = new FirefoxDriver();  //Download from Nudget Packages
 
             driver.Manage().Window.Maximize();
@@ -130,34 +132,35 @@ namespace Practo_Web_Mini_Project
                 Thread.Sleep(2000);
 
                 //24X7 Pharmacy
-                driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[1]/div/div/header/div[1]/div/div[4]/span")).Click();
-                ReadOnlyCollection<IWebElement> amenity = driver.FindElements(By.XPath("//*[@id='container']/div[3]/div/div[1]/div/div/header/div[2]/div/div/div"));
-                Thread.Sleep(2000);
-                foreach (IWebElement amenities in amenity)
-                {
-                    IWebElement pharmacy = driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[1]/div/div/header/div[2]/div/div/div/label[3]/div"));
-                    Actions actions = new Actions(driver);
-                    actions.MoveToElement(pharmacy).Click().Perform();
-                }
+            //  driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[1]/div/div/header/div[1]/div/div[4]/span")).Click();
+            //  ReadOnlyCollection<IWebElement> amenity = driver.FindElements(By.XPath("//*[@id='container']/div[3]/div/div[1]/div/div/header/div[2]/div/div/div"));
+            //  Thread.Sleep(2000);
+            //  foreach (IWebElement amenities in amenity)
+            //  {
+            //      IWebElement pharmacy = driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[1]/div/div/header/div[2]/div/div/div/label[3]/div"));
+            //      Actions actions = new Actions(driver);
+            //      actions.MoveToElement(pharmacy).Click().Perform();
+            //  }
 
-                Thread.Sleep(3000);
+                Thread.Sleep(5000);
 
                 //STEP 4- Searching Hospitals that are Accredited, 27x7 pharmacy And having star rating greater than 3
 
-                //ReadOnlyCollection<IWebElement> ListOfHospitals = driver.FindElements(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[2]/div/div/div[1]/div[2]/div/div[1]/div/div/span[1]"));
-                ReadOnlyCollection<IWebElement> ListOfHospitals = driver.FindElements(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[3]/div/div/div[1]/div[2]/div/div[1]/div/div/span[1]"));
+                ReadOnlyCollection<IWebElement> ListOfHospitals = driver.FindElements(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[2]/div/div/div[1]/div[2]/div/div[1]/div/div/span[1]"));
+                //ReadOnlyCollection<IWebElement> ListOfHospitals = driver.FindElements(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[3]/div/div/div[1]/div[2]/div/div[1]/div/div/span[1]"));
+                Thread.Sleep(3000);
                 List<String> hospitals = new List<String>();
                 for (int i = 2; i < ListOfHospitals.Count; i++)
                 {
-                    //IWebElement star_rating = driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[2]/div[" + i + "]/div/div[1]/div[2]/div/div[1]/div/div/span[1]"));
-                    IWebElement star_rating = driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[3]/div[" + i + "]/div/div[1]/div[2]/div/div[1]/div/div/span[1]"));
+                    IWebElement star_rating = driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[2]/div[" + i + "]/div/div[1]/div[2]/div/div[1]/div/div/span[1]"));
+                    //IWebElement star_rating = driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[3]/div[" + i + "]/div/div[1]/div[2]/div/div[1]/div/div/span[1]"));
                     String[] stars = star_rating.Text.Split('.');
                     int star_value = Int16.Parse(stars[0]);
                     Console.WriteLine(star_value);
                     if (star_value > 3)
                     {
-                      //String hospital_name = driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[2]/div[" + i + "]//h2")).Text;
-                        String hospital_name = driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[" + i + "]//a/h2")).Text;
+                        String hospital_name = driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[2]/div[" + i + "]//h2")).Text;
+                        //String hospital_name = driver.FindElement(By.XPath("//*[@id='container']/div[3]/div/div[2]/div[1]/div/div[" + i + "]//a/h2")).Text;
                         Console.WriteLine(hospital_name);
                         hospitals.Add(hospital_name);
                     }
